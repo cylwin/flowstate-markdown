@@ -13,6 +13,8 @@ If you exit early, or stop typing for longer than five seconds, all progress is 
 The app
 ===========
 
+You can try the app here : http://cylwin.github.io/flowstate-markdown
+
 The app is based on https://github.com/lepture/editor
 
 By default the session is set to 5 minuts. And the time beetween 2 types is 7 seconds. It's the duration that works the best for me.
