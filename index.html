@@ -1,0 +1,57 @@
+<html>
+	<header>
+		<title>flow editor</title>
+		<link rel="stylesheet" href="http://lab.lepture.com/editor/editor.css" />
+	</header>
+	<body>
+		<div>Remaning time : <span id="remainingTime"></span></div>
+		<div>Time before deleting all the content : <span id="chrono"></span></div>
+		<textarea name="md" id="md"></textarea>
+
+		<script type="text/javascript" src="http://lab.lepture.com/editor/editor.js"></script>
+		<script type="text/javascript" src="http://lab.lepture.com/editor/marked.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+		<script>
+			var editor = new Editor();
+			editor.render();
+
+			var duration = 0.5*60*1000; //5mn in ms
+			$("#remainingTime").text(duration/1000);
+
+			var chrono = 7*1000;
+			$("#chrono").text(chrono/1000);
+
+			function setChrono(value) {
+				chrono = value;
+				$("#chrono").text(chrono/1000);
+				if(chrono <= 0) {
+					editor.codemirror.setValue('damn... time is up, be more focus next time');
+					clearInterval(timer);
+				}
+			}
+
+			var remainingTime = duration; //5mn in ms
+
+			function setRemainingTime(value) {
+				remainingTime = value;
+				$("#remainingTime").text(value/1000);
+				if(value <= 0) {
+					alert("Congrats the session is OK");
+					clearInterval(timer);
+				}
+			}
+
+			var timer = setInterval(function(){
+				setChrono(chrono - 100);
+				setRemainingTime(remainingTime - 100);
+			}, 100);
+
+
+			editor.codemirror.on('change', function(){
+				setChrono(7*1000);
+			});
+		</script>
+	</body>
+</html>
+
+
